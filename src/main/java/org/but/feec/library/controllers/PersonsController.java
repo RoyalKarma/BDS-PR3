@@ -33,15 +33,15 @@ public class PersonsController {
     @FXML
     private TableColumn<PersonBasicView, Long> personsId;
     @FXML
-    private TableColumn<PersonBasicView, String> personsCity;
-    @FXML
     private TableColumn<PersonBasicView, Long> isbn;
     @FXML
     private TableColumn<PersonBasicView, String> authorName;
     @FXML
     private TableColumn<PersonBasicView, String> bookTitle;
     @FXML
-    private TableColumn<PersonBasicView, String> personsNickname;
+    private TableColumn<PersonBasicView, String> authorSurname;
+    @FXML
+    private TableColumn<PersonBasicView, String> datePublished;
     @FXML
     private TableView<PersonBasicView> systemPersonsTableView;
 //    @FXML
@@ -60,11 +60,13 @@ public class PersonsController {
 //        GlyphsDude.setIcon(exitMenuItem, FontAwesomeIcon.CLOSE, "1em");
 
         personsId.setCellValueFactory(new PropertyValueFactory<PersonBasicView, Long>("id"));
-        personsCity.setCellValueFactory(new PropertyValueFactory<PersonBasicView, String>("city"));
+
         isbn.setCellValueFactory(new PropertyValueFactory<PersonBasicView, Long>("isbn"));
         authorName.setCellValueFactory(new PropertyValueFactory<PersonBasicView, String>("authorName"));
         bookTitle.setCellValueFactory(new PropertyValueFactory<PersonBasicView, String>("bookTitle"));
-        personsNickname.setCellValueFactory(new PropertyValueFactory<PersonBasicView, String>("nickname"));
+        authorSurname.setCellValueFactory(new PropertyValueFactory<PersonBasicView, String>("authorSurname"));
+        datePublished.setCellValueFactory(new PropertyValueFactory<PersonBasicView, String>("datePublished"));
+
 
 
         ObservableList<PersonBasicView> observablePersonsList = initializePersonsData();
@@ -81,9 +83,9 @@ public class PersonsController {
     private void initializeTableViewSelection() {
         MenuItem edit = new MenuItem("Edit person");
         MenuItem detailedView = new MenuItem("Detailed person view");
-        edit.setOnAction((ActionEvent event) -> {
+        /*edit.setOnAction((ActionEvent event) -> {
             PersonBasicView personView = systemPersonsTableView.getSelectionModel().getSelectedItem();
-            /*try {
+            try {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(App.class.getResource("fxml/PersonEdit.fxml"));
                 Stage stage = new Stage();
@@ -102,7 +104,7 @@ public class PersonsController {
             } catch (IOException ex) {
                 ExceptionHandler.handleException(ex);
             }
-        });
+        });*/
 
         detailedView.setOnAction((ActionEvent event) -> {
             PersonBasicView personView = systemPersonsTableView.getSelectionModel().getSelectedItem();
@@ -111,8 +113,8 @@ public class PersonsController {
                 fxmlLoader.setLocation(App.class.getResource("fxml/PersonsDetailView.fxml"));
                 Stage stage = new Stage();
 
-                Long personId = personView.getId();
-                PersonDetailView personDetailView = personService.getPersonDetailView(personId);
+                Long book_id = personView.getId();
+                PersonDetailView personDetailView = personService.getPersonDetailView(book_id);
 
                 stage.setUserData(personDetailView);
                 stage.setTitle("BDS JavaFX Persons Detailed View");
@@ -135,8 +137,8 @@ public class PersonsController {
         ContextMenu menu = new ContextMenu();
         menu.getItems().add(edit);
         menu.getItems().addAll(detailedView);
-        systemPersonsTableView.setContextMenu(menu);*/
-    });}
+        systemPersonsTableView.setContextMenu(menu);
+    }
 
     private ObservableList<PersonBasicView> initializePersonsData() {
         List<PersonBasicView> persons = personService.getPersonsBasicView();

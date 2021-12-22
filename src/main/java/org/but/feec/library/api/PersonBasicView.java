@@ -7,10 +7,11 @@ import javafx.beans.property.StringProperty;
 
 public class PersonBasicView {
     private final LongProperty id = new SimpleLongProperty();
-    private final StringProperty city = new SimpleStringProperty();
     private final LongProperty isbn = new SimpleLongProperty();
     private final StringProperty bookTitle = new SimpleStringProperty();
     private final StringProperty authorName = new SimpleStringProperty();
+    private final StringProperty authorSurname = new SimpleStringProperty();
+    private final StringProperty datePublished = new SimpleStringProperty();
 
 
 
@@ -22,13 +23,7 @@ public class PersonBasicView {
         this.idProperty().setValue(id);
     }
 
-    public String getCity() {
-        return cityProperty().get();
-    }
 
-    public void setCity(String city) {
-        this.cityProperty().setValue(city);
-    }
 
     public Long getIsbn() {
         return isbnProperty().get();
@@ -54,13 +49,20 @@ public class PersonBasicView {
         this.authorNameProperty().setValue(authorName);
     }
 
+    public String getAuthorSurname() {
+        return authorSurnameProperty().get();
+    }
+
+    public void setAuthorSurname(String authorSurname) {
+        this.authorSurnameProperty().setValue(authorSurname);
+    }
+
+    public String getDatePublished() { return datePublishedProperty().get();}
+
+    public void setDatePublished(String datePublished) {this.datePublishedProperty().setValue(datePublished);}
 
     public LongProperty idProperty() {
         return id;
-    }
-
-    public StringProperty cityProperty() {
-        return city;
     }
 
     public LongProperty isbnProperty() {
@@ -75,6 +77,12 @@ public class PersonBasicView {
         return authorName;
     }
 
+    public StringProperty authorSurnameProperty() {
+        return authorSurname;
+    }
+    public StringProperty datePublishedProperty(){
+        return datePublished;
+    }
 
 
 }

@@ -38,16 +38,18 @@ public class PersonRepository {
         return null;
     }
 
-    public PersonDetailView findPersonDetailedView(Long personId) {
+    public PersonDetailView findPersonDetailedView(Long id) {
         try (Connection connection = DataSourceConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
-                     "SELECT book_id, isbn, book_title" +
-                             " FROM library.book p" )
+                     "SELECT book_id, isbn" +
+                             " FROM library.book b" +
+
+                             " WHERE b.book_id = ?")
 //                             +
 //                             " LEFT JOIN bds.address a ON p.id_address = a.id_address" +
 //                             " WHERE p.id_person = ?")
         ) {
-            preparedStatement.setLong(1, personId);
+            preparedStatement.setLong(1, id);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     return mapToPersonDetailView(resultSet);
@@ -67,10 +69,12 @@ public class PersonRepository {
     public List<PersonBasicView> getPersonsBasicView() {
         try (Connection connection = DataSourceConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
-                     "SELECT book_id, isbn, book_title, date_published, author_name, author_surname" +
-                             " FROM library.book b" +
-                      "LEFT JOIN library.book_has_author bhs on b.book_id = bhs.book_book_id" +
-                      "LEFT JOIN library.author a on a.author_id=bhs.author_author_id ");
+                     "SELECT book_id, isbn, book_title, author_name, author_surname, date_published" +
+                             " FROM library.book b"  +
+                             " LEFT JOIN library.book_has_author ba on b.book_id=ba.book_book_id " +
+                             " LEFT  JOIN library.author a on ba.author_author_id=a.author_id "
+                             );
+
 //             "SELECT id_person, email, first_name, surname, nickname, city" +
 //                             " FROM bds.person p" +
 //                             " LEFT JOIN bds.address a ON p.id_address = a.id_address");
@@ -86,7 +90,7 @@ public class PersonRepository {
     }
 
 //    public void createPerson(PersonCreateView personCreateView) {
-//        String insertPersonSQL = "INSERT INTO bds.person (email, first_name, nickname, pwd, surname) VALUES (?,?,?,?,?)";
+//        String insertPersonSQL = "INSERT INTO library.book (isbn, book_name, date_published pwd, surname) VALUES (?,?,?,?,?)";
 //        try (Connection connection = DataSourceConfig.getConnection();
 //             // would be beneficial if I will return the created entity back
 //             PreparedStatement preparedStatement = connection.prepareStatement(insertPersonSQL, Statement.RETURN_GENERATED_KEYS)) {
@@ -169,6 +173,8 @@ public class PersonRepository {
         personBasicView.setIsbn(rs.getLong("isbn"));
         personBasicView.setBookTitle(rs.getString("book_title"));
         personBasicView.setAuthorName(rs.getString("author_name"));
+        personBasicView.setAuthorSurname(rs.getString("author_surname"));
+        personBasicView.setDatePublished(rs.getString("date_published"));
 //        personBasicView.setNickname(rs.getString("nickname"));
 //        personBasicView.setCity(rs.getString("city"));
         return personBasicView;
@@ -178,7 +184,7 @@ public class PersonRepository {
         PersonDetailView personDetailView = new PersonDetailView();
         personDetailView.setId(rs.getLong("book_id"));
         personDetailView.setIsbn(rs.getLong("isbn"));
-        personDetailView.setBookTitle(rs.getString("book_title"));
+   //     personDetailView.setBookTitle(rs.getString("book_title"));
  //       personDetailView.setFamilyName(rs.getString("date_published"));
 //        personDetailView.setNickname(rs.getString("nickname"));
 //        personDetailView.setCity(rs.getString("city"));
