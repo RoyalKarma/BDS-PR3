@@ -1,6 +1,7 @@
 package org.but.feec.library.services;
 
 import org.but.feec.library.api.PersonBasicView;
+import org.but.feec.library.api.PersonCreateView;
 import org.but.feec.library.api.PersonDetailView;
 import org.but.feec.library.data.PersonRepository;
 
@@ -23,14 +24,14 @@ public class PersonService {
         return personRepository.getPersonsBasicView();
     }
 
-//    public void createPerson(PersonCreateView personCreateView) {
-//        // the following three lines can be written in one code line (only for more clear explanation it is written in three lines
+    public void createPerson(PersonCreateView personCreateView) {
+        // the following three lines can be written in one code line (only for more clear explanation it is written in three lines
 //        char[] originalPassword = personCreateView.getPwd();
 //        char[] hashedPassword = hashPassword(originalPassword);
 //        personCreateView.setPwd(hashedPassword);
-//
-//        personRepository.createPerson(personCreateView);
-//    }
+
+        personRepository.createPerson(personCreateView);
+    }
 
 //    public void editPerson(PersonEditView personEditView) {
 //        personRepository.editPerson(personEditView);
@@ -47,6 +48,7 @@ public class PersonService {
     private char[] hashPassword(char[] password) {
         return BCrypt.withDefaults().hashToChar(12, password);
     }
+
 
 
 }

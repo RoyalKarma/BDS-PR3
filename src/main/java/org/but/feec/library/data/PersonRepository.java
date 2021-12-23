@@ -3,6 +3,7 @@ package org.but.feec.library.data;
 
 import org.but.feec.library.api.PersonAuthView;
 import org.but.feec.library.api.PersonBasicView;
+import org.but.feec.library.api.PersonCreateView;
 import org.but.feec.library.api.PersonDetailView;
 import org.but.feec.library.config.DataSourceConfig;
 import org.but.feec.library.exceptions.DataAccessException;
@@ -91,32 +92,32 @@ public class PersonRepository {
                 personBasicViews.add(mapToPersonBasicView(resultSet));
             }
             return personBasicViews;
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             throw new DataAccessException("Persons basic view could not be loaded.", e);
         }
     }
 
-//    public void createPerson(PersonCreateView personCreateView) {
-//        String insertPersonSQL = "INSERT INTO library.book (isbn, book_name, date_published pwd, surname) VALUES (?,?,?,?,?)";
-//        try (Connection connection = DataSourceConfig.getConnection();
-//             // would be beneficial if I will return the created entity back
-//             PreparedStatement preparedStatement = connection.prepareStatement(insertPersonSQL, Statement.RETURN_GENERATED_KEYS)) {
-//            // set prepared statement variables
-//            preparedStatement.setString(1, personCreateView.getEmail());
-//            preparedStatement.setString(2, personCreateView.getFirstName());
-//            preparedStatement.setString(3, personCreateView.getNickname());
-//            preparedStatement.setString(4, String.valueOf(personCreateView.getPwd()));
-//            preparedStatement.setString(5, personCreateView.getSurname());
-//
-//            int affectedRows = preparedStatement.executeUpdate();
-//
-//            if (affectedRows == 0) {
-//                throw new DataAccessException("Creating person failed, no rows affected.");
-//            }
-//        } catch (SQLException e) {
-//            throw new DataAccessException("Creating person failed operation on the database failed.");
-//        }
-//    }
+    public void createPerson(PersonCreateView personCreateView) {
+        String insertPersonSQL = "INSERT INTO library.book (isbn, book_title, publishing_house_id) VALUES (?,?, ?)";
+        try (Connection connection = DataSourceConfig.getConnection();
+             // would be beneficial if I will return the created entity back
+             PreparedStatement preparedStatement = connection.prepareStatement(insertPersonSQL, Statement.RETURN_GENERATED_KEYS)) {
+            // set prepared statement variables
+            preparedStatement.setLong(1, personCreateView.getIsbn());
+            preparedStatement.setString(2, personCreateView.getBookTitle());
+            preparedStatement.setLong(3, personCreateView.getPublishingHouseId());
+
+
+            int affectedRows = preparedStatement.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new DataAccessException("Creating person failed, no rows affected.");
+            }
+        } catch (SQLException e) {
+            throw new DataAccessException("Creating person failed operation on the database failed.");
+        }
+    }
 //
 //    public void editPerson(PersonEditView personEditView) {
 //        String insertPersonSQL = "UPDATE bds.person p SET email = ?, first_name = ?, nickname = ?, surname = ? WHERE p.id_person = ?";

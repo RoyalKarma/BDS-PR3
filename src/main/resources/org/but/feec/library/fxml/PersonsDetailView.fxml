@@ -71,7 +71,7 @@
                         <Insets left="5.0" />
                     </padding>
                 </Label>
-                
+
                 <TextField fx:id="publishingHouseTextField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                 <TextField fx:id="categoryNameTextField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             </children>
