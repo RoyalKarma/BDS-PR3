@@ -38,12 +38,12 @@ public class PersonsCreateController {
     @FXML
     private TextField newPersonPublishingHouseId;
 
-//    @FXML
-//    private TextField newBookAuthorName;
-//
-//    @FXML
-//    private TextField newBookAuthorSurname;
-//
+    @FXML
+    private TextField newPersonAuthorName;
+
+    @FXML
+    private TextField newPersonAuthorSurname;
+
     @FXML
     private TextField newPersonDatePublished;
 
@@ -61,8 +61,8 @@ public class PersonsCreateController {
         validation.registerValidator(newPersonIsbn, Validator.createEmptyValidator("The email must not be empty."));
         validation.registerValidator(newPersonBookTitle, Validator.createEmptyValidator("The first name must not be empty."));
         validation.registerValidator(newPersonPublishingHouseId, Validator.createEmptyValidator("The ID must not be empty."));
-//        validation.registerValidator(newBookAuthorName, Validator.createEmptyValidator("The last name must not be empty."));
-//        validation.registerValidator(newBookAuthorSurname, Validator.createEmptyValidator("The nickname must not be empty."));
+        validation.registerValidator(newPersonAuthorName, Validator.createEmptyValidator("The last name must not be empty."));
+        validation.registerValidator(newPersonAuthorSurname, Validator.createEmptyValidator("The nickname must not be empty."));
         validation.registerValidator(newPersonDatePublished, Validator.createEmptyValidator("The published date must not be empty."));
 
         newPersonCreatePerson.disableProperty().bind(validation.invalidProperty());
@@ -76,16 +76,18 @@ public class PersonsCreateController {
         Long isbn = Long.valueOf(newPersonIsbn.getText());
         String bookTitle = newPersonBookTitle.getText();
         Long publishingHouseId = Long.valueOf(newPersonPublishingHouseId.getText());
-        System.out.println(valueOf(newPersonDatePublished.getText()));
+
         Date datePublished = valueOf(newPersonDatePublished.getText());
+        String authorName = newPersonAuthorName.getText();
+        String authorSurname = newPersonAuthorSurname.getText();
 
 
         PersonCreateView personCreateView = new PersonCreateView();
         personCreateView.setIsbn(isbn);
         personCreateView.setBookTitle(bookTitle);
         personCreateView.setPublishingHouseId(publishingHouseId);
-//        personCreateView.setAuthorName(authorName);
-//        personCreateView.setAuthorSurname(authorSurname);
+        personCreateView.setAuthorName(authorName);
+        personCreateView.setAuthorSurname(authorSurname);
        personCreateView.setDatePublished(datePublished);
 
 

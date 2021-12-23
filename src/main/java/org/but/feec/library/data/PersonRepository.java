@@ -99,17 +99,19 @@ public class PersonRepository {
     }
 
     public void createPerson(PersonCreateView personCreateView) {
-        String insertPersonSQL = "INSERT INTO library.book (isbn, book_title, publishing_house_id, date_published) VALUES (?,?, ?, ?)";
+        String insertPersonSQL = " INSERT INTO library.book (isbn, book_title, publishing_house_id, date_published) VALUES (?,?, ?, ?)\n";
+        String insertAuthorSQL = " INSERT INTO library.author(author_name, author_surname, date_birth, date_death) VALUES (?, ?, null, null)\n";
+        String insertConnectionSQL = "Insert into library.book_has_author(book_book_id, author_author_id) values ((SELECT book_id FROM library.book WHERE isbn=?),(SELECT author_id FROM library.author WHERE author_name =? and author_surname = ?));\n";
+        //book
         try (Connection connection = DataSourceConfig.getConnection();
              // would be beneficial if I will return the created entity back
              PreparedStatement preparedStatement = connection.prepareStatement(insertPersonSQL, Statement.RETURN_GENERATED_KEYS)) {
+            System.out.println(preparedStatement);
             // set prepared statement variables
             preparedStatement.setLong(1, personCreateView.getIsbn());
             preparedStatement.setString(2, personCreateView.getBookTitle());
             preparedStatement.setLong(3, personCreateView.getPublishingHouseId());
             preparedStatement.setDate(4, personCreateView.getDatePublished());
-
-
             int affectedRows = preparedStatement.executeUpdate();
 
             if (affectedRows == 0) {
@@ -118,7 +120,45 @@ public class PersonRepository {
         } catch (SQLException e) {
             throw new DataAccessException("Creating person failed operation on the database failed.");
         }
+        //author
+        try (Connection connection = DataSourceConfig.getConnection();
+             // would be beneficial if I will return the created entity back
+             PreparedStatement preparedStatement = connection.prepareStatement(insertAuthorSQL, Statement.RETURN_GENERATED_KEYS)) {
+            System.out.println(preparedStatement);
+            // set prepared statement variables
+            preparedStatement.setString(1, personCreateView.getAuthorName());
+            preparedStatement.setString(2,personCreateView.getAuthorSurname());
+            int affectedRows = preparedStatement.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new DataAccessException("Creating person failed, no rows affected.");
+            }
+        } catch (SQLException e) {
+            throw new DataAccessException("Creating person failed operation on the database failed.");
+        }
+        //relation betweek book and author
+
+        try (Connection connection = DataSourceConfig.getConnection();
+             // would be beneficial if I will return the created entity back
+             PreparedStatement preparedStatement = connection.prepareStatement(insertConnectionSQL, Statement.RETURN_GENERATED_KEYS)) {
+            System.out.println(preparedStatement);
+            // set prepared statement variables
+            preparedStatement.setLong(1,   personCreateView.getIsbn());
+            preparedStatement.setString(2, personCreateView.getAuthorName());
+            preparedStatement.setString(3, personCreateView.getAuthorSurname());
+            int affectedRows = preparedStatement.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new DataAccessException("Creating person failed, no rows affected.");
+            }
+        } catch (SQLException e) {
+            throw new DataAccessException("Creating person failed operation on the database failed.");
+        }
+        //im sorry
+
     }
+
+
 //
 //    public void editPerson(PersonEditView personEditView) {
 //        String insertPersonSQL = "UPDATE bds.person p SET email = ?, first_name = ?, nickname = ?, surname = ? WHERE p.id_person = ?";
