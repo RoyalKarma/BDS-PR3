@@ -41,17 +41,24 @@ public class PersonRepository {
     public PersonDetailView findPersonDetailedView(Long id) {
         try (Connection connection = DataSourceConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
-                     "SELECT book_id, isbn" +
+                     "SELECT b.book_id, isbn,book_title, author_name, author_surname, date_published, category_name, publishing_house_name" +
                              " FROM library.book b" +
+                             " LEFT JOIN library.book_has_author ba on b.book_id=ba.book_book_id" +
+                             " LEFT JOIN library.author a on ba.author_author_id=a.author_id" +
+                             " LEFT JOIN library.book_has_literature_category bhlc on b.book_id =bhlc.book_book_id" +
+                             " LEFT JOIN library.literature_category lc on bhlc.literature_category_literature_category=lc.literature_category_id" +
+                             " LEFT JOIN library.publishing_house ph on b.publishing_house_id=ph.publishing_house_id" +
+                             " WHERE b.book_id = ?");
 
-                             " WHERE b.book_id = ?")
-//                             +
+
 //                             " LEFT JOIN bds.address a ON p.id_address = a.id_address" +
 //                             " WHERE p.id_person = ?")
         ) {
             preparedStatement.setLong(1, id);
+            System.out.println(preparedStatement);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
+
                     return mapToPersonDetailView(resultSet);
                 }
             }
@@ -175,8 +182,6 @@ public class PersonRepository {
         personBasicView.setAuthorName(rs.getString("author_name"));
         personBasicView.setAuthorSurname(rs.getString("author_surname"));
         personBasicView.setDatePublished(rs.getString("date_published"));
-//        personBasicView.setNickname(rs.getString("nickname"));
-//        personBasicView.setCity(rs.getString("city"));
         return personBasicView;
     }
 
@@ -184,12 +189,21 @@ public class PersonRepository {
         PersonDetailView personDetailView = new PersonDetailView();
         personDetailView.setId(rs.getLong("book_id"));
         personDetailView.setIsbn(rs.getLong("isbn"));
-   //     personDetailView.setBookTitle(rs.getString("book_title"));
- //       personDetailView.setFamilyName(rs.getString("date_published"));
-//        personDetailView.setNickname(rs.getString("nickname"));
-//        personDetailView.setCity(rs.getString("city"));
-//        personDetailView.sethouseNumber(rs.getString("house_number"));
-//        personDetailView.setStreet(rs.getString("street"));
+        personDetailView.setBookTitle(rs.getString("book_title"));
+        personDetailView.setAuthorName(rs.getString("author_name"));
+        personDetailView.setAuthorSurname(rs.getString("author_surname"));
+        personDetailView.setPublishingHouse(rs.getString("publishing_house_name"));
+        personDetailView.setCategoryName(rs.getString("category_name"));
+        personDetailView.setDatePublished(rs.getString("date_published"));
+        System.out.println(personDetailView);
         return personDetailView;
     }
+//    "SELECT b.book_id, isbn,book_title, author_name, author_surname, date_published, category_name, publishing_house_name" +
+//            " FROM library.book b" +
+//            " LEFT JOIN library.book_has_author ba on b.book_id=ba.book_book_id" +
+//            " LEFT JOIN library.author a on ba.author_author_id=a.author_id" +
+//            " LEFT JOIN library.book_has_literature_category bhlc on b.book_id =bhlc.book_book_id" +
+//            " LEFT JOIN library.literature_category lc on bhlc.literature_category_literature_category=lc.literature_category_id" +
+//            " LEFT JOIN library.publishing_house ph on b.publishing_house_id=ph.publishing_house_id" +
+//            " WHERE b.book_id = ?");
 }

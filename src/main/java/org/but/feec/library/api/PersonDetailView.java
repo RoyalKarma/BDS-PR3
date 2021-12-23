@@ -3,16 +3,18 @@ import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.stage.Stage;
 
 public class PersonDetailView {
-    private LongProperty id = new SimpleLongProperty();
-    private LongProperty isbn = new SimpleLongProperty();
-//    private StringProperty givenName = new SimpleStringProperty();
-//    private StringProperty familyName = new SimpleStringProperty();
-//    private StringProperty nickname = new SimpleStringProperty();
-//    private StringProperty city = new SimpleStringProperty();
-//    private StringProperty street = new SimpleStringProperty();
-//    private StringProperty houseNumber = new SimpleStringProperty();
+    private final LongProperty id = new SimpleLongProperty();
+    private final LongProperty isbn = new SimpleLongProperty();
+    private final StringProperty bookTitle = new SimpleStringProperty();
+    private final StringProperty authorName = new SimpleStringProperty();
+    private final StringProperty authorSurname = new SimpleStringProperty();
+    private final StringProperty categoryName = new SimpleStringProperty();
+    private final StringProperty publishingHouse = new SimpleStringProperty();
+    private final StringProperty datePublished = new SimpleStringProperty();
+
 
     public Long getId() {
         return idProperty().get();
@@ -30,53 +32,39 @@ public class PersonDetailView {
         this.isbnProperty().setValue(isbn);
     }
 
-//    public String getGivenName() {
-//        return givenNameProperty().get();
-//    }
-//
-//    public void setBookTitle(String bookTitle) {
-//        this.givenNameProperty().setValue(bookTitle);
-//    }
+    public String getBookTitle() {
+        return bookTitleProperty().get();
+    }
 
-//    public String getFamilyName() {
-//        return familyNameProperty().get();
-//    }
-//
-//    public void setFamilyName(String familyName) {
-//        this.familyNameProperty().setValue(familyName);
-//    }
-//
-//    public String getNickname() {
-//        return nicknameProperty().get();
-//    }
-//
-//    public void setNickname(String nickname) {
-//        this.nicknameProperty().set(nickname);
-//    }
-//
-//    public String getCity() {
-//        return cityProperty().get();
-//    }
-//
-//    public void setCity(String city) {
-//        this.cityProperty().setValue(city);
-//    }
-//
-//    public String gethouseNumber() {
-//        return houseNumberProperty().get();
-//    }
-//
-//    public void sethouseNumber(String houseNumber) {
-//        this.houseNumberProperty().setValue(houseNumber);
-//    }
-//
-//    public String getStreet() {
-//        return streetProperty().get();
-//    }
-//
-//    public void setStreet(String street) {
-//        this.streetProperty().setValue(street);
-//    }
+    public void setBookTitle(String bookTitle) {
+        this.bookTitleProperty().setValue(bookTitle);
+    }
+
+    public String getAuthorName() {
+        return authorNameProperty().get();
+    }
+    public void setAuthorName(String authorName) {
+        this.authorNameProperty().setValue(authorName);
+    }
+
+    public String getAuthorSurname() {
+        return authorSurnameProperty().get();
+    }
+    public void setAuthorSurname(String authorSurname) {
+        this.authorSurnameProperty().setValue(authorSurname);
+    }
+
+    public String getCategoryName() {return categoryNameProperty().get(); }
+    public void setCategoryName(String categoryName){this.categoryNameProperty().setValue(categoryName);}
+
+    public String getPublishingHouse() {return publishingHouseProperty().get();}
+    public void setPublishingHouse(String publishingHouse){this.publishingHouseProperty().setValue(publishingHouse);}
+
+    public String getDatePublished() { return datePublishedProperty().get();}
+    public void setDatePublished(String datePublished) {this.datePublishedProperty().setValue(datePublished);}
+
+
+
 
     public LongProperty idProperty() {
         return id;
@@ -86,29 +74,29 @@ public class PersonDetailView {
         return isbn;
     }
 
-//    public StringProperty givenNameProperty() {
-//        return givenName;
-//    }
-//
-//    public StringProperty familyNameProperty() {
-//        return familyName;
-//    }
-//
-//    public StringProperty nicknameProperty() {
-//        return nickname;
-//    }
-//
-//    public StringProperty cityProperty() {
-//        return city;
-//    }
-//
-//    public StringProperty houseNumberProperty() {
-//        return houseNumber;
-//    }
-//
-//    public StringProperty streetProperty() {
-//        return street;
-//    }
+    public StringProperty bookTitleProperty() {
+        return bookTitle;
+    }
+
+    public StringProperty authorNameProperty() {
+        return authorName;
+    }
+
+    public StringProperty authorSurnameProperty() {
+        return authorSurname;
+    }
+    public StringProperty datePublishedProperty(){
+        return datePublished;
+    }
+
+    public StringProperty categoryNameProperty() {
+        return categoryName;
+    }
+    public StringProperty publishingHouseProperty(){
+        return publishingHouse;
+    }
 
 
 }
+
+

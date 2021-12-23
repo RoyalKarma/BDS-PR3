@@ -50,8 +50,7 @@ public class PersonsController {
     private PersonService personService;
     private PersonRepository personRepository;
 
-    public PersonsController() {
-    }
+
 
     @FXML
     private void initialize() {
@@ -60,22 +59,21 @@ public class PersonsController {
 //        GlyphsDude.setIcon(exitMenuItem, FontAwesomeIcon.CLOSE, "1em");
 
         personsId.setCellValueFactory(new PropertyValueFactory<PersonBasicView, Long>("id"));
-
+        bookTitle.setCellValueFactory(new PropertyValueFactory<PersonBasicView, String>("bookTitle"));
         isbn.setCellValueFactory(new PropertyValueFactory<PersonBasicView, Long>("isbn"));
         authorName.setCellValueFactory(new PropertyValueFactory<PersonBasicView, String>("authorName"));
-        bookTitle.setCellValueFactory(new PropertyValueFactory<PersonBasicView, String>("bookTitle"));
         authorSurname.setCellValueFactory(new PropertyValueFactory<PersonBasicView, String>("authorSurname"));
-        datePublished.setCellValueFactory(new PropertyValueFactory<PersonBasicView, String>("datePublished"));
+       datePublished.setCellValueFactory(new PropertyValueFactory<PersonBasicView, String>("datePublished"));
 
 
 
-        ObservableList<PersonBasicView> observablePersonsList = initializePersonsData();
-        systemPersonsTableView.setItems(observablePersonsList);
+        ObservableList<PersonBasicView> observablePersonList = initializePersonsData();
+        systemPersonsTableView.setItems(observablePersonList);
 
         systemPersonsTableView.getSortOrder().add(personsId);
 
         initializeTableViewSelection();
-      //  loadIcons();
+        //  loadIcons();
 
         logger.info("PersonsController initialized");
     }
@@ -113,8 +111,8 @@ public class PersonsController {
                 fxmlLoader.setLocation(App.class.getResource("fxml/PersonsDetailView.fxml"));
                 Stage stage = new Stage();
 
-                Long book_id = personView.getId();
-                PersonDetailView personDetailView = personService.getPersonDetailView(book_id);
+                Long personId = personView.getId();
+                PersonDetailView personDetailView = personService.getPersonDetailView(personId);
 
                 stage.setUserData(personDetailView);
                 stage.setTitle("BDS JavaFX Persons Detailed View");
@@ -132,6 +130,7 @@ public class PersonsController {
                 ExceptionHandler.handleException(ex);
             }
         });
+
 
 
         ContextMenu menu = new ContextMenu();

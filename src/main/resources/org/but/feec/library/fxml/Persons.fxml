@@ -57,9 +57,10 @@
                                     <columns>
                                         <TableColumn fx:id="personsId" minWidth="75.0" prefWidth="80.00000303983688" text="id" />
                                         <TableColumn fx:id="isbn" minWidth="75.0" prefWidth="160.00001525878906" text="isbn" />
-                                        <TableColumn fx:id="bookTitle" minWidth="75.0" prefWidth="120.0" text="book title" />
-                                        <TableColumn fx:id="personsAuthorName" minWidth="75.0" prefWidth="120.0" text="author name" />
-                                        <TableColumn fx:id="personsAuthorSurname" minWidth="75.0" prefWidth="120.0" text="author surname" />
+                                        <TableColumn fx:id="bookTitle" minWidth="75.0" prefWidth="159.0" text="book title" />
+                                        <TableColumn fx:id="authorName" minWidth="75.0" prefWidth="131.0" text="author name" />
+                                        <TableColumn fx:id="authorSurname" minWidth="75.0" prefWidth="131.0" text="author surname" />
+                                        <TableColumn fx:id="datePublished" minWidth="75.0" prefWidth="131.0" text="date published" />
 
                                     </columns>
                                 </TableView>
