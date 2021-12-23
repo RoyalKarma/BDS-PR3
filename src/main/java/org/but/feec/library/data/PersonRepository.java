@@ -99,7 +99,7 @@ public class PersonRepository {
     }
 
     public void createPerson(PersonCreateView personCreateView) {
-        String insertPersonSQL = "INSERT INTO library.book (isbn, book_title, publishing_house_id) VALUES (?,?, ?)";
+        String insertPersonSQL = "INSERT INTO library.book (isbn, book_title, publishing_house_id, date_published) VALUES (?,?, ?, ?)";
         try (Connection connection = DataSourceConfig.getConnection();
              // would be beneficial if I will return the created entity back
              PreparedStatement preparedStatement = connection.prepareStatement(insertPersonSQL, Statement.RETURN_GENERATED_KEYS)) {
@@ -107,6 +107,7 @@ public class PersonRepository {
             preparedStatement.setLong(1, personCreateView.getIsbn());
             preparedStatement.setString(2, personCreateView.getBookTitle());
             preparedStatement.setLong(3, personCreateView.getPublishingHouseId());
+            preparedStatement.setDate(4, personCreateView.getDatePublished());
 
 
             int affectedRows = preparedStatement.executeUpdate();

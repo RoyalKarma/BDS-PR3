@@ -1,11 +1,14 @@
 package org.but.feec.library.api;
 
+
+import java.sql.Date;
+
 public class PersonCreateView {
     private Long isbn;
     private String bookTitle;
 //    private String authorName;
 //    private String authorSurname;
-//    private String datePublished;
+    private Date datePublished;
    private Long publishingHouseId;
 
     public Long getIsbn() {return isbn; }
@@ -32,13 +35,13 @@ public class PersonCreateView {
 //    public void setAuthorSurname(String authorSurname) {this.authorSurname = authorSurname;}
 //
 //
-//    public String getDatePublished() {
-//        return datePublished;
-//    }
-//
-//    public void setDatePublished(String datePublished) {
-//        this.datePublished    = datePublished;
-//    }
+    public Date getDatePublished() {
+        return datePublished;
+    }
+
+    public void setDatePublished(Date datePublished) {
+        this.datePublished = datePublished;
+    }
 
     public Long getPublishingHouseId(){return publishingHouseId;}
     public void setPublishingHouseId(Long publishingHouseId) {this.publishingHouseId = publishingHouseId;}
@@ -50,6 +53,7 @@ public class PersonCreateView {
                 "isbn='" + isbn + '\'' +
                 ", bookTitle='" + bookTitle + '\'' +
                 ", publishingHouseID='" + publishingHouseId + '\'' +
+                ", datePublished ='" + datePublished + '\'' +
                 '}';
     }
 }

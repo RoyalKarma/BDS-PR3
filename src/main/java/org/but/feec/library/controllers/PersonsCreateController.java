@@ -18,7 +18,11 @@ import org.controlsfx.validation.Validator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.sql.Date;
 import java.util.Optional;
+
+import static java.sql.Date.valueOf;
+
 public class PersonsCreateController {
 
     private static final Logger logger = LoggerFactory.getLogger(PersonsCreateController.class);
@@ -40,8 +44,8 @@ public class PersonsCreateController {
 //    @FXML
 //    private TextField newBookAuthorSurname;
 //
-//    @FXML
-//    private TextField newDatePublished;
+    @FXML
+    private TextField newPersonDatePublished;
 
 
     private PersonService personService;
@@ -59,7 +63,7 @@ public class PersonsCreateController {
         validation.registerValidator(newPersonPublishingHouseId, Validator.createEmptyValidator("The ID must not be empty."));
 //        validation.registerValidator(newBookAuthorName, Validator.createEmptyValidator("The last name must not be empty."));
 //        validation.registerValidator(newBookAuthorSurname, Validator.createEmptyValidator("The nickname must not be empty."));
-//        validation.registerValidator(newDatePublished, Validator.createEmptyValidator("The password must not be empty."));
+        validation.registerValidator(newPersonDatePublished, Validator.createEmptyValidator("The published date must not be empty."));
 
         newPersonCreatePerson.disableProperty().bind(validation.invalidProperty());
 
@@ -72,9 +76,8 @@ public class PersonsCreateController {
         Long isbn = Long.valueOf(newPersonIsbn.getText());
         String bookTitle = newPersonBookTitle.getText();
         Long publishingHouseId = Long.valueOf(newPersonPublishingHouseId.getText());
-//        String authorName = newBookAuthorName.getText();
-//        String authorSurname = newBookAuthorSurname.getText();
-//        String datePublished = newDatePublished.getText();
+        System.out.println(valueOf(newPersonDatePublished.getText()));
+        Date datePublished = valueOf(newPersonDatePublished.getText());
 
 
         PersonCreateView personCreateView = new PersonCreateView();
@@ -83,7 +86,7 @@ public class PersonsCreateController {
         personCreateView.setPublishingHouseId(publishingHouseId);
 //        personCreateView.setAuthorName(authorName);
 //        personCreateView.setAuthorSurname(authorSurname);
-//        personCreateView.setDatePublished(datePublished);
+       personCreateView.setDatePublished(datePublished);
 
 
         personService.createPerson(personCreateView);

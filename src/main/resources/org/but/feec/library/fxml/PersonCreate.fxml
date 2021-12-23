@@ -39,9 +39,15 @@
                         <Insets left="5.0" />
                     </padding>
                 </Label>
+                <Label text="Date published" GridPane.rowIndex="3">
+                    <padding>
+                        <Insets left="5.0" />
+                    </padding>
+                </Label>
                 <TextField fx:id="newPersonIsbn" promptText="type new book isbn" GridPane.columnIndex="1" />
                 <TextField fx:id="newPersonBookTitle" promptText="type new book title" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 <TextField fx:id="newPersonPublishingHouseId" promptText="publ house id" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <TextField fx:id="newPersonDatePublished" promptText="YYYY-MM-DD" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             </children>
         </GridPane>
         <Button fx:id="newPersonCreatePerson" layoutX="501.0" layoutY="349.0" mnemonicParsing="false" onAction="#handleCreateNewPerson" text="create" />
