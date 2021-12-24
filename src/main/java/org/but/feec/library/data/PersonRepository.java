@@ -1,6 +1,7 @@
 package org.but.feec.library.data;
 
 
+import javafx.scene.control.TableColumn;
 import org.but.feec.library.api.*;
 import org.but.feec.library.config.DataSourceConfig;
 import org.but.feec.library.exceptions.DataAccessException;
@@ -64,6 +65,22 @@ public class PersonRepository {
             throw new DataAccessException("Find person by ID with addresses failed.", e);
         }
         return null;
+    }
+
+    public void removeBook(Long id) {
+        String deleteBookSQL =  "DELETE FROM library.book WHERE book_id = ?";
+        System.out.println(deleteBookSQL);
+        try (Connection connection = DataSourceConfig.getConnection();
+             PreparedStatement prpstmt = connection.prepareStatement(deleteBookSQL)){
+
+            prpstmt.setLong(1, id);
+            prpstmt.executeUpdate();
+
+        }
+        catch (SQLException e) {
+           System.out.println("failed");
+        }
+
     }
 
     /**
@@ -237,6 +254,11 @@ public class PersonRepository {
         System.out.println(personDetailView);
         return personDetailView;
     }
+
+    public void removeBook(TableColumn<PersonBasicView, Long> personsId) {
+    }
+
+
 //    "SELECT b.book_id, isbn,book_title, author_name, author_surname, date_published, category_name, publishing_house_name" +
 //            " FROM library.book b" +
 //            " LEFT JOIN library.book_has_author ba on b.book_id=ba.book_book_id" +

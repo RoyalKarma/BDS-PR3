@@ -130,9 +130,17 @@ public class PersonsController {
             } catch (IOException ex) {
                 ExceptionHandler.handleException(ex);
             }
+
         });
 
 
+        delete.setOnAction((ActionEvent event)-> {
+            PersonBasicView personView = systemPersonsTableView.getSelectionModel().getSelectedItem();
+            Long personsId = personView.getId();
+            personRepository.removeBook(personsId);
+
+
+        });
 
         ContextMenu menu = new ContextMenu();
         menu.getItems().add(edit);
@@ -183,5 +191,9 @@ public class PersonsController {
         systemPersonsTableView.setItems(observablePersonsList);
         systemPersonsTableView.refresh();
         systemPersonsTableView.sort();
+    }
+    @FXML
+    public void handleDeleteBook(){
+
     }
 }

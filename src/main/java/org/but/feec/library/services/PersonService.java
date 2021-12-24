@@ -1,9 +1,6 @@
 package org.but.feec.library.services;
 
-import org.but.feec.library.api.PersonBasicView;
-import org.but.feec.library.api.PersonCreateView;
-import org.but.feec.library.api.PersonDetailView;
-import org.but.feec.library.api.PersonEditView;
+import org.but.feec.library.api.*;
 import org.but.feec.library.data.PersonRepository;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
@@ -16,6 +13,8 @@ public class PersonService {
     public PersonService(PersonRepository personRepository) {
         this.personRepository = personRepository;
     }
+
+
 
     public PersonDetailView getPersonDetailView(Long id) {
         return personRepository.findPersonDetailedView(id);
