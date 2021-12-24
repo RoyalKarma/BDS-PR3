@@ -81,7 +81,8 @@ public class PersonsController {
     private void initializeTableViewSelection() {
         MenuItem edit = new MenuItem("Edit person");
         MenuItem detailedView = new MenuItem("Detailed person view");
-        /*edit.setOnAction((ActionEvent event) -> {
+        MenuItem delete = new MenuItem ("Delete person");
+            edit.setOnAction((ActionEvent event) -> {
             PersonBasicView personView = systemPersonsTableView.getSelectionModel().getSelectedItem();
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader();
@@ -102,7 +103,7 @@ public class PersonsController {
             } catch (IOException ex) {
                 ExceptionHandler.handleException(ex);
             }
-        });*/
+        });
 
         detailedView.setOnAction((ActionEvent event) -> {
             PersonBasicView personView = systemPersonsTableView.getSelectionModel().getSelectedItem();
@@ -136,6 +137,7 @@ public class PersonsController {
         ContextMenu menu = new ContextMenu();
         menu.getItems().add(edit);
         menu.getItems().addAll(detailedView);
+        menu.getItems().add(delete);
         systemPersonsTableView.setContextMenu(menu);
     }
 

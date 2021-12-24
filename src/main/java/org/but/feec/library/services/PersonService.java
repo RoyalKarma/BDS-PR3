@@ -3,6 +3,7 @@ package org.but.feec.library.services;
 import org.but.feec.library.api.PersonBasicView;
 import org.but.feec.library.api.PersonCreateView;
 import org.but.feec.library.api.PersonDetailView;
+import org.but.feec.library.api.PersonEditView;
 import org.but.feec.library.data.PersonRepository;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
@@ -31,6 +32,10 @@ public class PersonService {
 //        personCreateView.setPwd(hashedPassword);
 
         personRepository.createPerson(personCreateView);
+
+    }
+    public void editPerson(PersonEditView personEditView) {
+        personRepository.editPerson(personEditView);
     }
 
 //    public void editPerson(PersonEditView personEditView) {
