@@ -94,7 +94,7 @@ public class PersonsController {
                 fxmlLoader.setLocation(App.class.getResource("fxml/PersonEdit.fxml"));
                 Stage stage = new Stage();
                 stage.setUserData(personView);
-                stage.setTitle("BDS JavaFX Edit Person");
+                stage.setTitle("Library");
 
                 PersonsEditController controller = new PersonsEditController();
                 controller.setStage(stage);
@@ -121,7 +121,7 @@ public class PersonsController {
                 PersonDetailView personDetailView = personService.getPersonDetailView(personId);
 
                 stage.setUserData(personDetailView);
-                stage.setTitle("BDS JavaFX Persons Detailed View");
+                stage.setTitle("Library book detailed view");
 
                 PersonsDetailViewController controller = new PersonsDetailViewController();
                 controller.setStage(stage);
@@ -176,7 +176,7 @@ public class PersonsController {
             fxmlLoader.setLocation(App.class.getResource("fxml/PersonCreate.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 600, 500);
             Stage stage = new Stage();
-            stage.setTitle("BDS JavaFX Create Person");
+            stage.setTitle("Library create book entry");
             stage.setScene(scene);
 
 //            Stage stageOld = (Stage) signInButton.getScene().getWindow();

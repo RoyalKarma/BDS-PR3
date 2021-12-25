@@ -22,10 +22,10 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            loader = new FXMLLoader(getClass().getResource("Login.fxml"));
+            loader = new FXMLLoader(getClass().getResource("fxml/Login.fxml"));
             mainStage = loader.load();
 
-            primaryStage.setTitle("BDS JavaFX Library Demo");
+            primaryStage.setTitle("Library db");
             Scene scene = new Scene(mainStage);
             setUserAgentStylesheet(STYLESHEET_MODENA);
 
