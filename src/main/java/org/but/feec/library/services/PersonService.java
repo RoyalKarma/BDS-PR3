@@ -23,8 +23,8 @@ public class PersonService {
     public List<PersonBasicView> getPersonsBasicView() {
         return personRepository.getPersonsBasicView();
     }
-    public List<BookFilterView> getBookFilterView(){
-        return personRepository.getBookFilterView();
+    public List<BookFilterView> getBookFilterView(String text){
+        return personRepository.getBookFilterView(text);
     }
     public void createPerson(PersonCreateView personCreateView) {
         // the following three lines can be written in one code line (only for more clear explanation it is written in three lines

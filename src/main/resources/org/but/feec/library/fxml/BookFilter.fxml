@@ -3,7 +3,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.VBox?>
-<VBox minHeight="625.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.but.feec.library.controllers.BooksFilterController">
+<VBox minHeight="625.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" >
    <children>
       <TableView fx:id="systemPersonsTableView" layoutX="-1.0" layoutY="-1.0" prefHeight="400.0" prefWidth="600.0">
         <columns>

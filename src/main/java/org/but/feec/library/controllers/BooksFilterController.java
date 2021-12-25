@@ -54,7 +54,10 @@ public class BooksFilterController {
 //        LoadPersonData();
     }
     private ObservableList<BookFilterView> initializePersonsData() {
-        List<BookFilterView> persons = personService.getBookFilterView();
+
+        String text = (String) stage.getUserData();
+        System.out.println("controller "+text);
+        List<BookFilterView> persons = personService.getBookFilterView(text);
         return FXCollections.observableArrayList(persons);
     }
 //    private void LoadPersonData(){

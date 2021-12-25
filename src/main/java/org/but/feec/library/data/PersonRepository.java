@@ -5,6 +5,7 @@ import javafx.scene.control.TableColumn;
 import org.but.feec.library.api.*;
 import org.but.feec.library.config.DataSourceConfig;
 import org.but.feec.library.exceptions.DataAccessException;
+import org.w3c.dom.ls.LSOutput;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -99,6 +100,7 @@ public class PersonRepository {
                              " LEFT  JOIN library.author a on ba.author_author_id=a.author_id "
                              );
 
+
 //             "SELECT id_person, email, first_name, surname, nickname, city" +
 //                             " FROM bds.person p" +
 //                             " LEFT JOIN bds.address a ON p.id_address = a.id_address");
@@ -113,19 +115,26 @@ public class PersonRepository {
             throw new DataAccessException("Persons basic view could not be loaded.", e);
         }
     }
-    public List<BookFilterView> getBookFilterView(){
+    public List<BookFilterView> getBookFilterView(String text){
+        System.out.println(text);
+        String filter = '%'+text+'%';
         try (Connection connection = DataSourceConfig.getConnection();
+
              PreparedStatement preparedStatement = connection.prepareStatement(
                      "SELECT book_id, isbn, book_title, author_name, author_surname, date_published" +
                              " FROM library.book b"  +
                              " LEFT JOIN library.book_has_author ba on b.book_id=ba.book_book_id " +
-                             " LEFT  JOIN library.author a on ba.author_author_id=a.author_id "
-             );
+                             " LEFT JOIN library.author a on ba.author_author_id=a.author_id " +
+                             " where lower(book_title) like lower(?) "
+             )
+
 
 //             "SELECT id_person, email, first_name, surname, nickname, city" +
 //                             " FROM bds.person p" +
 //                             " LEFT JOIN bds.address a ON p.id_address = a.id_address");
-             ResultSet resultSet = preparedStatement.executeQuery();) {
+             ) {
+            preparedStatement.setString(1,filter);
+            ResultSet resultSet = preparedStatement.executeQuery();
             List<BookFilterView> bookFilterViews = new ArrayList<>();
             while (resultSet.next()) {
                 bookFilterViews.add(mapToBookFilterView(resultSet));

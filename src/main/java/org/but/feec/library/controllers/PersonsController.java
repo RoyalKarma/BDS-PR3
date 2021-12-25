@@ -48,6 +48,7 @@ public class PersonsController {
     private TableColumn<PersonBasicView, String> datePublished;
     @FXML
     private TableView<PersonBasicView> systemPersonsTableView;
+
 //    @FXML
 //    public MenuItem exitMenuItem;
 
@@ -199,10 +200,18 @@ public class PersonsController {
 
     public void handleFilterButton(ActionEvent actionEvent){
         try {
+            String text = searchBar.getText();
+            System.out.println("handler" +text);
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(App.class.getResource("fxml/BookFilter.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 600, 500);
             Stage stage = new Stage();
+            BooksFilterController booksFilterController = new BooksFilterController();
+            stage.setUserData(text);
+            booksFilterController.setStage(stage);
+            fxmlLoader.setController(booksFilterController);
+            Scene scene = new Scene(fxmlLoader.load(), 600, 500);
+
+
             stage.setTitle("filter");
             stage.setScene(scene);
             stage.show();
