@@ -12,6 +12,8 @@ import java.util.List;
 
 public class PersonRepository {
 
+
+
     public PersonAuthView findPersonByEmail(String email) {
         try (Connection connection = DataSourceConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
@@ -106,6 +108,29 @@ public class PersonRepository {
                 personBasicViews.add(mapToPersonBasicView(resultSet));
             }
             return personBasicViews;
+        }
+        catch (SQLException e) {
+            throw new DataAccessException("Persons basic view could not be loaded.", e);
+        }
+    }
+    public List<BookFilterView> getBookFilterView(){
+        try (Connection connection = DataSourceConfig.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "SELECT book_id, isbn, book_title, author_name, author_surname, date_published" +
+                             " FROM library.book b"  +
+                             " LEFT JOIN library.book_has_author ba on b.book_id=ba.book_book_id " +
+                             " LEFT  JOIN library.author a on ba.author_author_id=a.author_id "
+             );
+
+//             "SELECT id_person, email, first_name, surname, nickname, city" +
+//                             " FROM bds.person p" +
+//                             " LEFT JOIN bds.address a ON p.id_address = a.id_address");
+             ResultSet resultSet = preparedStatement.executeQuery();) {
+            List<BookFilterView> bookFilterViews = new ArrayList<>();
+            while (resultSet.next()) {
+                bookFilterViews.add(mapToBookFilterView(resultSet));
+            }
+            return bookFilterViews;
         }
         catch (SQLException e) {
             throw new DataAccessException("Persons basic view could not be loaded.", e);
@@ -268,8 +293,15 @@ public class PersonRepository {
         return personDetailView;
     }
 
-    public void removeBook(TableColumn<PersonBasicView, Long> personsId) {
-    }
+   private BookFilterView mapToBookFilterView(ResultSet rs) throws SQLException{
+        BookFilterView bookFilterView = new BookFilterView();
+       bookFilterView.setId(rs.getLong("book_id"));
+       bookFilterView.setIsbn(rs.getLong("isbn"));
+       bookFilterView.setBookTitle(rs.getString("book_title"));
+       bookFilterView.setAuthorName(rs.getString("author_name"));
+       bookFilterView.setAuthorSurname(rs.getString("author_surname"));
+       return bookFilterView;
+   }
 
 
 //    "SELECT b.book_id, isbn,book_title, author_name, author_surname, date_published, category_name, publishing_house_name" +
