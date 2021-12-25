@@ -30,29 +30,32 @@
                         <Insets left="5.0" />
                     </padding>
                 </Label>
-                <Label text="email" GridPane.rowIndex="1">
+                <Label text="isbn" GridPane.rowIndex="1">
                     <padding>
                         <Insets left="5.0" />
                     </padding>
                 </Label>
-                <Label text="first name" GridPane.rowIndex="2">
+                <Label text="book title" GridPane.rowIndex="2">
                     <padding>
                         <Insets left="5.0" />
                     </padding>
                 </Label>
-                <Label text="last name" GridPane.rowIndex="3">
+                <Label text="author name" GridPane.rowIndex="3">
                     <padding>
                         <Insets left="5.0" />
                     </padding>
                 </Label>
-                <Label text="nickname" GridPane.rowIndex="4">
+                <Label text="author surname" GridPane.rowIndex="4">
                     <padding>
                         <Insets left="5.0" />
                     </padding>
                 </Label>
+
                 <TextField fx:id="idTextField" GridPane.columnIndex="1" />
                 <TextField fx:id="isbnTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 <TextField fx:id="bookTitleTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <TextField fx:id="authorNameTextField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <TextField fx:id="authorSurnameTextField" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
             </children>
         </GridPane>
         <Button fx:id="editPersonButton" layoutX="501.0" layoutY="349.0" mnemonicParsing="false" onAction="#handleEditPersonButton" text="edit person" />

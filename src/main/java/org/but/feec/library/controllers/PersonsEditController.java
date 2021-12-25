@@ -33,6 +33,10 @@ public class PersonsEditController {
     private TextField isbnTextField;
     @FXML
     private TextField bookTitleTextField;
+    @FXML
+    private TextField authorNameTextField;
+    @FXML
+    private TextField authorSurnameTextField;
 
 
     private PersonService personService;
@@ -56,8 +60,8 @@ public class PersonsEditController {
         idTextField.setEditable(false);
         validation.registerValidator(isbnTextField, Validator.createEmptyValidator("The email must not be empty."));
         validation.registerValidator(bookTitleTextField, Validator.createEmptyValidator("The first name must not be empty."));
-//        validation.registerValidator(familyNameTextField, Validator.createEmptyValidator("The last name must not be empty."));
-//        validation.registerValidator(nicknameTextField, Validator.createEmptyValidator("The nickname must not be empty."));
+        validation.registerValidator(authorNameTextField, Validator.createEmptyValidator("The last name must not be empty."));
+        validation.registerValidator(authorSurnameTextField, Validator.createEmptyValidator("The nickname must not be empty."));
 
         editPersonButton.disableProperty().bind(validation.invalidProperty());
 
@@ -74,9 +78,10 @@ public class PersonsEditController {
         if (stage.getUserData() instanceof PersonBasicView) {
             PersonBasicView personBasicView = (PersonBasicView) stage.getUserData();
             idTextField.setText(String.valueOf(personBasicView.getId()));
-            // emailTextField.setText(bookBasicView.getEmail());
             isbnTextField.setText(String.valueOf(personBasicView.getIsbn()));
             bookTitleTextField.setText(personBasicView.getBookTitle());
+            authorNameTextField.setText(personBasicView.getAuthorName());
+            authorSurnameTextField.setText(personBasicView.getAuthorSurname());
         }
     }
 
@@ -86,15 +91,15 @@ public class PersonsEditController {
         Long id = Long.valueOf(idTextField.getText());
         Long isbn = Long.valueOf(isbnTextField.getText());
         String bookTitle = bookTitleTextField.getText();
-//        String lastName = familyNameTextField.getText();
-//        String nickname = nicknameTextField.getText();
+        String authorName = authorNameTextField.getText();
+        String authorSurname = authorSurnameTextField.getText();
 
         PersonEditView personEditView = new PersonEditView();
         personEditView.setId(id);
         personEditView.setIsbn(isbn);
         personEditView.setBookTitle(bookTitle);
-//        bookEditview.setFamilyName(lastName);
-//        bookEditview.setNickname(nickname);
+        personEditView.setAuthorName(authorName);
+        personEditView.setAuthorSurname(authorSurname);
 
        personService.editPerson(personEditView);
 

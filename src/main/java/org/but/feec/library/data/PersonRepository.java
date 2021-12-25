@@ -175,7 +175,16 @@ public class PersonRepository {
 
 
     public void editPerson(PersonEditView personEditView) {
-        String insertPersonSQL = "UPDATE library.book b SET isbn = ?, book_title = ? WHERE b.book_id = ?";
+        String insertPersonSQL =
+                "begin;" +
+                " UPDATE library.book b SET isbn = ?, book_title = ? WHERE b.book_id = ?;" +
+                " UPDATE library.author a SET author_name = ?, author_surname = ? WHERE a.author_id =(SELECT b.book_id from library.author a" +
+                " LEFT JOIN library.book_has_author bhs ON a.author_id =bhs.author_author_id" +
+                " LEFT JOIN library.book b on bhs.book_book_id = b.book_id" +
+                " WHERE b.book_id=?);"+
+                        "commit";
+
+
         String checkIfExists = "SELECT isbn FROM library.book b WHERE b.book_id = ?";
 
         try (Connection connection = DataSourceConfig.getConnection();
@@ -185,7 +194,10 @@ public class PersonRepository {
             preparedStatement.setLong(1, personEditView.getIsbn());
             preparedStatement.setString(2, personEditView.getBookTitle());
             preparedStatement.setLong(3, personEditView.getId());
-
+            preparedStatement.setString(4, personEditView.getAuthorName());
+            preparedStatement.setString(5, personEditView.getAuthorSurname());
+            preparedStatement.setLong(6, personEditView.getId());
+            System.out.println((preparedStatement));
             try {
                 // TODO set connection autocommit to false
                 connection.setAutoCommit(false);
@@ -203,6 +215,7 @@ public class PersonRepository {
                     throw new DataAccessException("Creating person failed, no rows affected.");
                 }
                 // TODO commit the transaction (both queries were performed)
+                System.out.println(connection);
                 connection.commit();
             } catch (SQLException e) {
                 // TODO rollback the transaction if something wrong occurs

@@ -8,8 +8,8 @@ public class PersonEditView {
         private Long id;
         private Long isbn;
         private String bookTitle;
-//        private String nickname;
-//        private String familyName;
+        private String authorName;
+        private String authorSurname;
 
         public Long getId() {
             return id;
@@ -34,30 +34,30 @@ public class PersonEditView {
         public void setBookTitle(String bookTitle) {
             this.bookTitle = bookTitle;
         }
-//
-//        public String getNickname() {
-//            return nickname;
-//        }
-//
-//        public void setNickname(String nickname) {
-//            this.nickname = nickname;
-//        }
-//
-//        public String getFamilyName() {
-//            return familyName;
-//        }
-//
-//        public void setFamilyName(String familyName) {
-//            this.familyName = familyName;
-//        }
+
+        public String getAuthorName() {
+            return authorName;
+        }
+
+        public void setAuthorName(String authorName) {
+            this.authorName = authorName;
+        }
+
+        public String getAuthorSurname() {
+            return authorSurname;
+        }
+
+        public void setAuthorSurname(String authorSurname) {
+            this.authorSurname = authorSurname;
+        }
 
         @Override
         public String toString() {
             return "PersonEditView{" +
                     "isbn='" + isbn + '\'' +
                     ", bookTitle='" + bookTitle + '\'' +
-//                    ", nickname='" +  + '\'' +
-//                    ", familyName='" + familyName + '\'' +
+                    ", authorName='" + authorName + '\'' +
+                    ", authorSurname='" + authorSurname + '\'' +
                     '}';
         }
 
