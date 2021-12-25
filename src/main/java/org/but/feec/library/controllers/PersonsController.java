@@ -31,6 +31,10 @@ public class PersonsController {
     @FXML
     public Button refreshButton;
     @FXML
+    public Button filterButton;
+    @FXML
+    public TextField searchBar;
+    @FXML
     private TableColumn<PersonBasicView, Long> personsId;
     @FXML
     private TableColumn<PersonBasicView, Long> isbn;
@@ -192,8 +196,20 @@ public class PersonsController {
         systemPersonsTableView.refresh();
         systemPersonsTableView.sort();
     }
-    @FXML
-    public void handleDeleteBook(){
+
+    public void handleFilterButton(ActionEvent actionEvent){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(App.class.getResource("fxml/BookFilter.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 600, 500);
+            Stage stage = new Stage();
+            stage.setTitle("filter");
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException ex) {
+            ExceptionHandler.handleException(ex);
+        }
 
     }
 }
