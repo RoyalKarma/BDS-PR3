@@ -5,10 +5,7 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.util.Duration;
 import org.but.feec.library.api.PersonCreateView;
 import org.but.feec.library.data.PersonRepository;
@@ -45,7 +42,7 @@ public class PersonsCreateController {
     private TextField newPersonAuthorSurname;
 
     @FXML
-    private TextField newPersonDatePublished;
+    private DatePicker newPersonDatePublished;
 
 
     private PersonService personService;
@@ -77,7 +74,7 @@ public class PersonsCreateController {
         String bookTitle = newPersonBookTitle.getText();
         Long publishingHouseId = Long.valueOf(newPersonPublishingHouseId.getText());
 
-        Date datePublished = valueOf(newPersonDatePublished.getText());
+        Date datePublished = valueOf(newPersonDatePublished.getValue());
         String authorName = newPersonAuthorName.getText();
         String authorSurname = newPersonAuthorSurname.getText();
 

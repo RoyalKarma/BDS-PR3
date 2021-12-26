@@ -34,7 +34,9 @@ import org.controlsfx.validation.ValidationSupport;
 import org.controlsfx.validation.Validator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.w3c.dom.Text;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -66,8 +68,10 @@ public class LoginController {
     @FXML
     private void initialize() {
         GlyphsDude.setIcon(signInButton, FontAwesomeIcon.SIGN_IN, "1em");
-        GlyphsDude.setIcon(usernameLabel, FontAwesomeIcon.USER, "2em");
+        GlyphsDude.setIcon(usernameLabel, FontAwesomeIcon.BOOK, "2em");
         GlyphsDude.setIcon(passwordLabel, FontAwesomeIcon.USER_SECRET, "2em");
+
+
         usernameTextfield.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 handleSignIn();
