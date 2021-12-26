@@ -7,6 +7,7 @@ import org.but.feec.library.config.DataSourceConfig;
 import org.but.feec.library.exceptions.DataAccessException;
 import org.w3c.dom.ls.LSOutput;
 
+import javax.swing.plaf.nimbus.State;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -144,6 +145,22 @@ public class PersonRepository {
         catch (SQLException e) {
             throw new DataAccessException("Persons basic view could not be loaded.", e);
         }
+    }
+    public List<InjectionView> getInjectionView(String input){
+        String query = "SELECT id,name,surname, age from injection.user u where u.id ="+input ;
+        try (Connection connection = DataSourceConfig.getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
+            List<InjectionView> injectionViews = new ArrayList<>();
+            while (resultSet.next()) {
+                injectionViews.add(mapToInjectionView(resultSet));
+            }
+            return injectionViews;
+        } catch (SQLException e) {
+            throw new DataAccessException("Find all users SQL failed.", e);
+        }
+
+
     }
 
     public void createPerson(PersonCreateView personCreateView) {
@@ -310,6 +327,14 @@ public class PersonRepository {
        bookFilterView.setAuthorName(rs.getString("author_name"));
        bookFilterView.setAuthorSurname(rs.getString("author_surname"));
        return bookFilterView;
+   }
+   private InjectionView mapToInjectionView(ResultSet rs ) throws  SQLException{
+        InjectionView injectionView = new InjectionView();
+        injectionView.setId(rs.getLong("id"));
+        injectionView.setName(rs.getString("name"));
+        injectionView.setSurname(rs.getString("surname"));
+        injectionView.setAge(rs.getLong("age"));
+        return injectionView;
    }
 
 

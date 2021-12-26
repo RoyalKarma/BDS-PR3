@@ -19,6 +19,7 @@ import org.but.feec.library.services.PersonService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.List;
 
@@ -220,5 +221,25 @@ public class PersonsController {
             ExceptionHandler.handleException(ex);
         }
 
+    }
+    public void handleInjectionButton(ActionEvent actionEvent){
+        try{
+
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(App.class.getResource("fxml/injectionTraining.fxml"));
+            Stage stage = new Stage();
+            InjectionController injectionController = new InjectionController();
+
+            injectionController.setStage(stage);
+            fxmlLoader.setController(injectionController);
+            Scene scene = new Scene(fxmlLoader.load(), 600, 500);
+
+
+            stage.setTitle("SQL Injection training");
+            stage.setScene(scene);
+            stage.show();
+        }catch (IOException ex) {
+            ExceptionHandler.handleException(ex);
+        }
     }
 }

@@ -1,16 +1,31 @@
 .root {
-    -fx-background-color: #ffefd5;
+    -fx-background-color: black;
 
+}
+.label{
+    -fx-font-size: 10;
+ -fx-font-family:"Lucida Console";
+ -fx-text-fill:black;
 }
 
 .button {
-    -fx-text-fill: white;
+
     -fx-font-family: "Arial Narrow";
     -fx-font-weight: bold;
-    -fx-background-color: linear-gradient(darkslategray, #000080);
+    -fx-text-fill:black;
+    -fx-background-color: linear-gradient(papayawhip, white);
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
 
 }
+#titleLable{
+ -fx-font-size: 20;
+}
 .button:hover {
     -fx-background-color: linear-gradient(#2A5058, #61a2b1);
+}
+#emailLogin{
+-fx-text-fill:white;
+}
+#pwdLogin{
+-fx-text-fill:white;
 }

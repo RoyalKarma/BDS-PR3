@@ -15,7 +15,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<VBox minHeight="625.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.but.feec.library.controllers.PersonsController" stylesheets="@theme.css" >
+<VBox minHeight="625.0" prefWidth="950.0" stylesheets="@theme.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.but.feec.library.controllers.PersonsController">
 
 
     <children>
@@ -63,6 +63,7 @@
                                 <Button fx:id="refreshButton" layoutX="127.0" layoutY="491.0" mnemonicParsing="false" onAction="#handleRefreshButton" text="Refresh" />
                         <Button fx:id="filterButton" layoutX="313.0" layoutY="30.0" mnemonicParsing="false" onAction="#handleFilterButton" text="SEARCH" />
                         <TextField fx:id="searchBar" layoutX="380.0" layoutY="32.0" promptText="enter book title" />
+                        <Button id="injectionButtion" fx:id="injectionButton" layoutX="750.0" layoutY="29.0" mnemonicParsing="false" onAction="#handleInjectionButton" prefHeight="23.0" prefWidth="142.0" text="SQLInjection training" />
                             </children>
                         </AnchorPane>
                     </content>

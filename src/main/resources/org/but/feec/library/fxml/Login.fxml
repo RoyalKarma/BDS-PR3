@@ -23,7 +23,7 @@
         <Pane prefHeight="363.0" prefWidth="600.0">
             <children>
                 <Label fx:id="vutLogo" layoutX="200.0" layoutY="95.0" prefHeight="17.0" prefWidth="62.0" />
-                <Label alignment="CENTER" layoutX="80.0" layoutY="84.0" prefHeight="98.0" prefWidth="225.0" text="Library database">
+                <Label id="titleLable" alignment="CENTER" layoutX="80.0" layoutY="84.0" prefHeight="98.0" prefWidth="225.0" text="Library database">
                     <font>
                         <Font name="Constantia" size="26.0" />
                     </font>
@@ -40,10 +40,10 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <Label fx:id="usernameLabel" text="User Name:" GridPane.columnIndex="1" />
-                        <Label fx:id="passwordLabel" text="Password:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label id="emailLogin" fx:id="usernameLabel" text="User Email" textFill="WHITE" GridPane.columnIndex="1" />
+                        <Label id="pwdLogin" fx:id="passwordLabel" text="Password:" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Button id="signInButton" fx:id="signInButton" mnemonicParsing="false" onAction="#signInActionHandler" prefHeight="33.0" prefWidth="90.0" text="Sign in" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
-                        <TextField id="usernameTextField" fx:id="usernameTextfield" promptText="type your username" GridPane.columnIndex="2" />
+                        <TextField id="usernameTextField" fx:id="usernameTextfield" promptText="type your email" GridPane.columnIndex="2" />
                         <PasswordField id="passwordTextField" fx:id="passwordTextField" promptText="type your password" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                     </children>
                 </GridPane>

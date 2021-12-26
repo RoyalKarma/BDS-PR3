@@ -26,6 +26,9 @@ public class PersonService {
     public List<BookFilterView> getBookFilterView(String text){
         return personRepository.getBookFilterView(text);
     }
+    public List<InjectionView> getInjectionView(String input){
+        return personRepository.getInjectionView(input);
+    }
     public void createPerson(PersonCreateView personCreateView) {
         // the following three lines can be written in one code line (only for more clear explanation it is written in three lines
 //        char[] originalPassword = personCreateView.getPwd();
