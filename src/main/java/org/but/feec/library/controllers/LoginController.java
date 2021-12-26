@@ -22,6 +22,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
+
 import org.but.feec.library.App;
 import org.but.feec.library.data.PersonRepository;
 import org.but.feec.library.exceptions.DataAccessException;
@@ -120,6 +122,7 @@ public class LoginController {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(App.class.getResource("fxml/Persons.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 1050, 600);
+
             Stage stage = new Stage();
             stage.setTitle("Library database");
             stage.setScene(scene);
@@ -127,10 +130,11 @@ public class LoginController {
             Stage stageOld = (Stage) signInButton.getScene().getWindow();
             stageOld.close();
 
-            //stage.getIcons().add(new Image(App.class.getResourceAsStream("logos/vut.jpg")));
+            stage.getIcons().add(new Image(App.class.getResourceAsStream("fxml/book.jpg")));
             authConfirmDialog();
 
             stage.show();
+
         } catch (IOException ex) {
             ExceptionHandler.handleException(ex);
         }
