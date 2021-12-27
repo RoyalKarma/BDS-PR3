@@ -1,2 +1,10 @@
 # BDS-PR3
-Implementation of a database from previous projects in java
+
+To build&run the project
+Enter the following command in the project root directory to build the project.
+
+$ mvn clean install
+Run the project:
+
+$ java -jar .\target\bds-library-1.0.0.jar
+
