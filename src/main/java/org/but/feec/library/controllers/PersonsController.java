@@ -85,9 +85,9 @@ public class PersonsController {
     }
 
     private void initializeTableViewSelection() {
-        MenuItem edit = new MenuItem("Edit person");
-        MenuItem detailedView = new MenuItem("Detailed person view");
-        MenuItem delete = new MenuItem ("Delete person");
+        MenuItem edit = new MenuItem("Edit book");
+        MenuItem detailedView = new MenuItem("Detailed book view");
+        MenuItem delete = new MenuItem ("Delete book");
             edit.setOnAction((ActionEvent event) -> {
             PersonBasicView personView = systemPersonsTableView.getSelectionModel().getSelectedItem();
             try {
@@ -213,7 +213,7 @@ public class PersonsController {
             Scene scene = new Scene(fxmlLoader.load(), 600, 500);
 
 
-            stage.setTitle("filter");
+            stage.setTitle("Filtered view");
             stage.setScene(scene);
             stage.show();
 

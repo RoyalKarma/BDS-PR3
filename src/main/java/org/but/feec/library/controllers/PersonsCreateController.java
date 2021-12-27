@@ -56,10 +56,10 @@ public class PersonsCreateController {
 
         validation = new ValidationSupport();
         validation.registerValidator(newPersonIsbn, Validator.createEmptyValidator("The email must not be empty."));
-        validation.registerValidator(newPersonBookTitle, Validator.createEmptyValidator("The first name must not be empty."));
+        validation.registerValidator(newPersonBookTitle, Validator.createEmptyValidator("The book title must not be empty."));
         validation.registerValidator(newPersonPublishingHouseId, Validator.createEmptyValidator("The ID must not be empty."));
-        validation.registerValidator(newPersonAuthorName, Validator.createEmptyValidator("The last name must not be empty."));
-        validation.registerValidator(newPersonAuthorSurname, Validator.createEmptyValidator("The nickname must not be empty."));
+        validation.registerValidator(newPersonAuthorName, Validator.createEmptyValidator("The author name must not be empty."));
+        validation.registerValidator(newPersonAuthorSurname, Validator.createEmptyValidator("The author surname must not be empty."));
         validation.registerValidator(newPersonDatePublished, Validator.createEmptyValidator("The published date must not be empty."));
 
         newPersonCreatePerson.disableProperty().bind(validation.invalidProperty());

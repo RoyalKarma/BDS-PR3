@@ -35,7 +35,7 @@ public class PersonRepository {
                 }
             }
         } catch (SQLException e) {
-            throw new DataAccessException("Find person by ID with addresses failed.", e);
+            throw new DataAccessException("Find person by EMAIL with addresses failed.", e);
         }
 
         return null;
@@ -66,7 +66,7 @@ public class PersonRepository {
                 }
             }
         } catch (SQLException e) {
-            throw new DataAccessException("Find person by ID with addresses failed.", e);
+            throw new DataAccessException("Find book by ID with addresses failed.", e);
         }
         return null;
     }
@@ -92,6 +92,7 @@ public class PersonRepository {
      *
      * @return list of persons
      */
+    /* it wont work */
     public List<PersonBasicView> getPersonsBasicView() {
         try (Connection connection = DataSourceConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
@@ -113,7 +114,7 @@ public class PersonRepository {
             return personBasicViews;
         }
         catch (SQLException e) {
-            throw new DataAccessException("Persons basic view could not be loaded.", e);
+            throw new DataAccessException("Librarz basic view could not be loaded.", e);
         }
     }
     public List<BookFilterView> getBookFilterView(String text){
@@ -143,7 +144,7 @@ public class PersonRepository {
             return bookFilterViews;
         }
         catch (SQLException e) {
-            throw new DataAccessException("Persons basic view could not be loaded.", e);
+            throw new DataAccessException("Library filter view could not be loaded.", e);
         }
     }
     public List<InjectionView> getInjectionView(String input){
@@ -164,12 +165,14 @@ public class PersonRepository {
     }
 
     public void createPerson(PersonCreateView personCreateView) {
+        //TODO Make this a transaction!!
         String insertPersonSQL = " INSERT INTO library.book (isbn, book_title, publishing_house_id, date_published) VALUES (?,?, ?, ?)\n";
         String insertAuthorSQL = " INSERT INTO library.author(author_name, author_surname, date_birth, date_death) VALUES (?, ?, null, null)\n";
-        String insertConnectionSQL = "Insert into library.book_has_author(book_book_id, author_author_id) values ((SELECT book_id FROM library.book WHERE isbn=?),(SELECT author_id FROM library.author WHERE author_name =? and author_surname = ?));\n";
+        String insertConnectionSQL = "Insert into library.book_has_author(book_book_id, author_author_id) values ((SELECT book_id FROM library.book WHERE isbn=?)," +
+                "(SELECT author_id FROM library.author WHERE author_name =? and author_surname = ?));\n";
         //book
         try (Connection connection = DataSourceConfig.getConnection();
-             // would be beneficial if I will return the created entity back
+
              PreparedStatement preparedStatement = connection.prepareStatement(insertPersonSQL, Statement.RETURN_GENERATED_KEYS)) {
             System.out.println(preparedStatement);
             // set prepared statement variables
@@ -180,10 +183,10 @@ public class PersonRepository {
             int affectedRows = preparedStatement.executeUpdate();
 
             if (affectedRows == 0) {
-                throw new DataAccessException("Creating person failed, no rows affected.");
+                throw new DataAccessException("Creating book failed, no rows affected.");
             }
         } catch (SQLException e) {
-            throw new DataAccessException("Creating person failed operation on the database failed.");
+            throw new DataAccessException("Creating book failed operation on the database failed.");
         }
         //author
         try (Connection connection = DataSourceConfig.getConnection();
@@ -196,13 +199,12 @@ public class PersonRepository {
             int affectedRows = preparedStatement.executeUpdate();
 
             if (affectedRows == 0) {
-                throw new DataAccessException("Creating person failed, no rows affected.");
+                throw new DataAccessException("Creating book failed, no rows affected.");
             }
         } catch (SQLException e) {
-            throw new DataAccessException("Creating person failed operation on the database failed.");
+            throw new DataAccessException("Creating book failed operation on the database failed.");
         }
         //relation betweek book and author
-
         try (Connection connection = DataSourceConfig.getConnection();
              // would be beneficial if I will return the created entity back
              PreparedStatement preparedStatement = connection.prepareStatement(insertConnectionSQL, Statement.RETURN_GENERATED_KEYS)) {
@@ -214,10 +216,10 @@ public class PersonRepository {
             int affectedRows = preparedStatement.executeUpdate();
 
             if (affectedRows == 0) {
-                throw new DataAccessException("Creating person failed, no rows affected.");
+                throw new DataAccessException("Creating book failed, no rows affected.");
             }
         } catch (SQLException e) {
-            throw new DataAccessException("Creating person failed operation on the database failed.");
+            throw new DataAccessException("Creating book failed operation on the database failed.");
         }
         //im sorry
 
@@ -250,33 +252,33 @@ public class PersonRepository {
             preparedStatement.setLong(6, personEditView.getId());
             System.out.println((preparedStatement));
             try {
-                // TODO set connection autocommit to false
+
                 connection.setAutoCommit(false);
                 try (PreparedStatement ps = connection.prepareStatement(checkIfExists, Statement.RETURN_GENERATED_KEYS)) {
                     ps.setLong(1, personEditView.getId());
 
                     ps.execute();
                 } catch (SQLException e) {
-                    throw new DataAccessException("This person for edit do not exists.");
+                    throw new DataAccessException("This book for edit do not exists.");
                 }
 
                 int affectedRows = preparedStatement.executeUpdate();
 
                 if (affectedRows == 0) {
-                    throw new DataAccessException("Creating person failed, no rows affected.");
+                    throw new DataAccessException("Creating book failed, no rows affected.");
                 }
-                // TODO commit the transaction (both queries were performed)
+
                 System.out.println(connection);
                 connection.commit();
             } catch (SQLException e) {
-                // TODO rollback the transaction if something wrong occurs
+
                 connection.rollback();
             } finally {
-                // TODO set connection autocommit back to true
+
                 connection.setAutoCommit(true);
             }
         } catch (SQLException e) {
-            throw new DataAccessException("Creating person failed operation on the database failed.");
+            throw new DataAccessException("Creating book failed operation on the database failed.");
         }
     }
 
