@@ -146,6 +146,8 @@ public class LibraryRepository {
     }
     public List<InjectionView> getInjectionView(String input){
         String query = "SELECT id,name,surname, age from injection.user u where u.id ="+input ;
+        // ''; DROP table user; --
+        // 1 OR 1=1
         try (Connection connection = DataSourceConfig.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(query)) {
@@ -162,7 +164,7 @@ public class LibraryRepository {
     }
 
     public void createPerson(LibraryCreateView libraryCreateView) {
-        //TODO Make this a transaction!!
+
         String insertPersonSQL = " INSERT INTO library.book (isbn, book_title, publishing_house_id, date_published) VALUES (?,?, ?, ?)\n";
         String insertAuthorSQL = " INSERT INTO library.author(author_name, author_surname, date_birth, date_death) VALUES (?, ?, null, null)\n";
         String insertConnectionSQL = "Insert into library.book_has_author(book_book_id, author_author_id) values ((SELECT book_id FROM library.book WHERE isbn=?)," +
@@ -179,11 +181,14 @@ public class LibraryRepository {
             preparedStatement.setDate(4, libraryCreateView.getDatePublished());
             int affectedRows = preparedStatement.executeUpdate();
 
+
+
             if (affectedRows == 0) {
                 throw new DataAccessException("Creating book failed, no rows affected.");
             }
         } catch (SQLException e) {
             throw new DataAccessException("Creating book failed operation on the database failed.");
+
         }
         //author
         try (Connection connection = DataSourceConfig.getConnection();
@@ -247,7 +252,7 @@ public class LibraryRepository {
             preparedStatement.setString(4, libraryEditView.getAuthorName());
             preparedStatement.setString(5, libraryEditView.getAuthorSurname());
             preparedStatement.setLong(6, libraryEditView.getId());
-            System.out.println((preparedStatement));
+            System.out.println(preparedStatement);
             try {
 
                 connection.setAutoCommit(false);

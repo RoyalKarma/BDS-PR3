@@ -2,6 +2,7 @@ package org.but.feec.library.api;
 
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class LibraryCreateView {
     private Long isbn;
@@ -9,6 +10,7 @@ public class LibraryCreateView {
     private String authorName;
     private String authorSurname;
     private Date datePublished;
+
    private Long publishingHouseId;
 
     public Long getIsbn() {return isbn; }

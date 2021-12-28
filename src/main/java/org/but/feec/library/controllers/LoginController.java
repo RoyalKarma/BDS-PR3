@@ -35,6 +35,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Optional;
 
 public class LoginController {
@@ -131,7 +132,7 @@ public class LoginController {
             Stage stageOld = (Stage) signInButton.getScene().getWindow();
             stageOld.close();
 
-            stage.getIcons().add(new Image(App.class.getResourceAsStream("fxml/book.jpg")));
+            stage.getIcons().add(new Image(Objects.requireNonNull(App.class.getResourceAsStream("fxml/logos/book.jpg"))));
             authConfirmDialog();
 
             stage.show();

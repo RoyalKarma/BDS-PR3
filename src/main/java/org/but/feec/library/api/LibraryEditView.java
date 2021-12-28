@@ -2,9 +2,6 @@ package org.but.feec.library.api;
 
 public class LibraryEditView {
 
-
-
-
         private Long id;
         private Long isbn;
         private String bookTitle;

@@ -11,7 +11,9 @@ public class LibraryBasicView {
     private final StringProperty bookTitle = new SimpleStringProperty();
     private final StringProperty authorName = new SimpleStringProperty();
     private final StringProperty authorSurname = new SimpleStringProperty();
+
     private final StringProperty datePublished = new SimpleStringProperty();
+
 
 
 

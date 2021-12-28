@@ -17,7 +17,7 @@
     -fx-font-weight: bold;
     -fx-text-fill:black;
     -fx-background-color: linear-gradient(papayawhip, white);
-    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-effect: dropshadow( three-pass-box , rgba(0.5,0,0,0.6) , 5, 0.0 , 0 , 1 );
     -fx-icon-color: white;
 
 }
