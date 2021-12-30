@@ -12,10 +12,13 @@ import javafx.stage.Stage;
 import org.but.feec.library.api.InjectionView;
 import org.but.feec.library.data.LibraryRepository;
 import org.but.feec.library.services.LibraryService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 public class InjectionController {
+    private static final Logger logger = LoggerFactory.getLogger(LibraryCreateController.class);
     @FXML
     private TableColumn<InjectionView, Long> id;
     @FXML
@@ -49,7 +52,7 @@ public class InjectionController {
         surname.setCellValueFactory(new PropertyValueFactory<InjectionView, String>("surname"));
         age.setCellValueFactory(new PropertyValueFactory<InjectionView, Long>("age"));
 
-
+        logger.info("InjectionController initialized");
 
     }
     private ObservableList<InjectionView> initializePersonsData() {

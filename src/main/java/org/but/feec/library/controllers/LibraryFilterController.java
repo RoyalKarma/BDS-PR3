@@ -10,10 +10,14 @@ import javafx.stage.Stage;
 import org.but.feec.library.api.LibraryFilterView;
 import org.but.feec.library.data.LibraryRepository;
 import org.but.feec.library.services.LibraryService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 public class LibraryFilterController {
+    private static final Logger logger = LoggerFactory.getLogger(LibraryController.class);
+
     @FXML
     public TableColumn<LibraryFilterView, Long> personsId;
     @FXML
@@ -48,6 +52,7 @@ public class LibraryFilterController {
 
         ObservableList<LibraryFilterView> observablePersonList = initializePersonsData();
         systemPersonsTableView.setItems(observablePersonList);
+        logger.info("LibraryFilterController initialized");
 
 //        LoadPersonData();
     }

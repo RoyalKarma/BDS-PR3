@@ -111,7 +111,7 @@ public class LibraryRepository {
             return libraryBasicViews;
         }
         catch (SQLException e) {
-            throw new DataAccessException("Librarz basic view could not be loaded.", e);
+            throw new DataAccessException("Library basic view could not be loaded.", e);
         }
     }
     public List<LibraryFilterView> getBookFilterView(String text){
@@ -145,14 +145,17 @@ public class LibraryRepository {
         }
     }
     public List<InjectionView> getInjectionView(String input){
-        String query = "SELECT id,name,surname, age from injection.user u where u.id ="+input ;
-        // ''; DROP table user; --
+        String query = "SELECT id,name,surname, age from injection.user u where u.id =" + input ;
+        // 1; DROP TABLE injection.user;--
         // 1 OR 1=1
         try (Connection connection = DataSourceConfig.getConnection();
              Statement statement = connection.createStatement();
+
              ResultSet resultSet = statement.executeQuery(query)) {
             List<InjectionView> injectionViews = new ArrayList<>();
+            System.out.println(statement);
             while (resultSet.next()) {
+
                 injectionViews.add(mapToInjectionView(resultSet));
             }
             return injectionViews;

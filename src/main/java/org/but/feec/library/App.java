@@ -8,7 +8,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
- * @author já
+ * @author Adam Tuček
+ * https://github.com/RoyalKarma/BDS-PR3
  */
 public class App extends Application {
 
